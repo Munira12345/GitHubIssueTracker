@@ -56,4 +56,20 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation("androidx.navigation:navigation-compose:2.7.5")
+    implementation ("androidx.compose.ui:ui:1.5.1")
+    implementation ("androidx.compose.material3:material3:1.1.2")
+    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
+    implementation ("androidx.activity:activity-compose:1.7.2")
+
+    // Networking (Retrofit & GraphQL)
+    implementation ("com.apollographql.apollo3:apollo-runtime:3.7.3")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // State management
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+
+    // Coil (Image Loading)
+    implementation ("io.coil-kt:coil-compose:2.2.2")
 }
