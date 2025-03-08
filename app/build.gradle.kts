@@ -66,7 +66,8 @@ dependencies {
     // Networking (Retrofit & GraphQL)
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.apollographql.apollo3:apollo-runtime:4.0.1")
+    //implementation("com.apollographql.apollo3:apollo-runtime:4.0.1")
+    // I DONT THINK APOLLO IS VERSION FOUR
 
 
     // State management
