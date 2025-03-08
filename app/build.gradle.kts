@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+  //  id("com.apollographql.apollo3")
 }
 
 android {
@@ -63,9 +64,10 @@ dependencies {
     implementation ("androidx.activity:activity-compose:1.7.2")
 
     // Networking (Retrofit & GraphQL)
-    implementation ("com.apollographql.apollo3:apollo-runtime:3.7.3")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.apollographql.apollo3:apollo-runtime:4.0.1")
+
 
     // State management
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
