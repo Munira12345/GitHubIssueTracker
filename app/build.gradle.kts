@@ -2,8 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-  //  id("com.apollographql.apollo3")
+   // alias(libs.plugins.apollo)
 }
+
 
 android {
     namespace = "com.munir.githubissuetracker"
@@ -28,20 +29,29 @@ android {
             )
         }
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
+
     buildFeatures {
         compose = true
     }
 }
 
-dependencies {
+/*apollo {
+    service("service") {
+        packageName.set("com.munir.githubissuetracker.graphql")
+    }
+    */
 
+
+dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -50,29 +60,32 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
     implementation("androidx.navigation:navigation-compose:2.7.5")
-    implementation ("androidx.compose.ui:ui:1.5.1")
-    implementation ("androidx.compose.material3:material3:1.1.2")
-    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
-    implementation ("androidx.activity:activity-compose:1.7.2")
+    implementation("androidx.compose.ui:ui:1.5.1")
+    implementation("androidx.compose.material3:material3:1.1.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
+    implementation("androidx.activity:activity-compose:1.7.2")
 
     // Networking (Retrofit & GraphQL)
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    //implementation("com.apollographql.apollo3:apollo-runtime:4.0.1")
-    // I DONT THINK APOLLO IS VERSION FOUR
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    // ✅ Apollo Runtime for GraphQL
+    implementation(libs.apollo.runtime)
 
     // State management
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
 
     // Coil (Image Loading)
-    implementation ("io.coil-kt:coil-compose:2.2.2")
+    implementation("io.coil-kt:coil-compose:2.2.2")
 }

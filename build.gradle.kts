@@ -3,5 +3,9 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.compose) apply false
-   // id("com.apollographql.apollo3") version "4.0.1" apply false
+    id("com.apollographql.apollo3") version "3.7.2" apply false
+
+}
+task<Delete>("clean") {
+    delete(rootProject.buildDir)
 }
