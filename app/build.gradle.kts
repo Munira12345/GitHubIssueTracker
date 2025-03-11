@@ -1,8 +1,9 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-   // alias(libs.plugins.apollo)
+    id("com.apollographql.apollo3")
 }
 
 
@@ -44,11 +45,15 @@ android {
     }
 }
 
-/*apollo {
+
+
+apollo {
     service("service") {
         packageName.set("com.munir.githubissuetracker.graphql")
     }
-    */
+}
+
+//}
 
 
 dependencies {
