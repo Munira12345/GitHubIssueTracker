@@ -1,0 +1,12 @@
+query GetIssues($owner: String!, $repo: String!) {
+    repository(owner: $owner, name: $repo) {
+        issues(last: 10) {
+            nodes {
+                id
+                title
+                body
+                createdAt
+            }
+        }
+    }
+}
