@@ -21,7 +21,8 @@ With a responsive UI, automated workflows, and secure authentication, Issue Trac
 ## SEARCHING/ HOME SCREEN 
 
 
-![WhatsApp Image 2025-03-12 at 14 27 43_7d6e7155](https://github.com/user-attachments/assets/7b5def3e-e77e-4ebb-902c-4e55faa20276)
+![WhatsApp Image 2025-03-12 at 14 49 56_bad38261](https://github.com/user-attachments/assets/ed7aca27-c0da-48d4-a5d7-e2d2e98cbb17)
+
 
 
 
