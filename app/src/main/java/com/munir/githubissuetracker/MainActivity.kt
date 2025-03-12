@@ -43,7 +43,7 @@ fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifie
             .build()
     }
 
-    val viewModel = remember { RepoViewModel(apolloClient) } // Passin ApolloClient
+    val viewModel = remember { RepoViewModel(apolloClient) }
 
 
 
