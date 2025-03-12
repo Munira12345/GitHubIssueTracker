@@ -9,6 +9,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
@@ -27,11 +30,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import coil.compose.rememberAsyncImagePainter
+import com.apollographql.apollo3.ApolloClient
+import com.munir.githubissuetracker.RepoViewModel
 
-@OptIn(ExperimentalComposeUiApi::class)
+
 @Composable
 fun RepoSelectionScreen(
-    onNavigateToIssueList: (String, String) -> Unit
+viewModel: RepoViewModel,
+onNavigateToIssueList: (String, String) -> Unit
 ) {
     var username by remember { mutableStateOf("") }
     var repo by remember { mutableStateOf("") }
@@ -47,7 +53,7 @@ fun RepoSelectionScreen(
             .padding(16.dp)
     ) {
         Text(
-            text = "GitHub Issue Tracker",
+            text = "Smart Bug Tracker",
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold
         )
@@ -82,8 +88,7 @@ fun RepoSelectionScreen(
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Next
-            ),
-           // leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search Icon") }
+            )
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -99,8 +104,7 @@ fun RepoSelectionScreen(
             ),
             keyboardActions = KeyboardActions(onDone = {
                 keyboardController?.hide()
-            }),
-           // leadingIcon = { Icon(Icons.Default.Star, contentDescription = "Repository Icon") }
+            })
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -131,6 +135,7 @@ fun RepoSelectionScreen(
                         showError = true
                     } else {
                         showError = false
+                        viewModel.fetchIssues(username, repo) // **Trigger fetchIssues()**
                         onNavigateToIssueList(username, repo)
                     }
                 },
@@ -165,6 +170,7 @@ fun RepoSelectionScreen(
     }
 }
 
+
 @Composable
 fun RecentSearchItem(repoName: String, onSelect: () -> Unit) {
     Card(
@@ -185,5 +191,16 @@ fun RecentSearchItem(repoName: String, onSelect: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun RepoSelectionScreenPreview() {
-    RepoSelectionScreen { _, _ -> }
+    // fake ApolloClient
+    val fakeApolloClient = ApolloClient.Builder()
+        .serverUrl("https://example.com/graphql")
+        .build()
+
+    //  fake client to the ViewModel
+    val fakeViewModel = RepoViewModel(apolloClient = fakeApolloClient)
+
+    RepoSelectionScreen(
+        viewModel = fakeViewModel,
+        onNavigateToIssueList = { _, _ -> }
+    )
 }

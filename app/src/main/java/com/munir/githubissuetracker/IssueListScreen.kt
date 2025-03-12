@@ -13,29 +13,49 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.graphics.Color
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun IssueListScreen(onIssueClick: () -> Unit) {
+fun IssueListScreen(
+    username: String,
+    repo: String,
+    viewModel: RepoViewModel,
+    onNavigate: () -> Unit
+) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(username, repo) {
+        viewModel.fetchIssues(username, repo)
+    }
+
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         Text(
-            text = "Issues",
+            text = "Issues for $username/$repo",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 8.dp)
         )
 
-        LazyColumn {
-            items(5) { index ->
-                IssueItem(
-                    title = "Issue #$index: Bug in App",
-                    tag = "Bug",
-                    status = if (index % 2 == 0) "Open" else "Closed",
-                    description = "App crashes on startup when launching...",
-                    onClick = onIssueClick
-                )
+        when (uiState) {
+            is RepoUiState.Loading -> CircularProgressIndicator()
+            is RepoUiState.Success -> {
+                val issues = (uiState as RepoUiState.Success).issues
+                LazyColumn {
+                    items(issues) { issue ->
+                        IssueItem(
+                            title = issue.title,
+                            tag = "General", // Adjust if you have tags
+                            status = "Open", // Modify if status is available
+                            description = issue.body,
+                            onClick = onNavigate
+                        )
+                    }
+                }
             }
+            is RepoUiState.Error -> Text(
+                text = (uiState as RepoUiState.Error).message,
+                color = Color.Red
+            )
+            else -> {}
         }
     }
 }
@@ -69,8 +89,17 @@ fun IssueItem(title: String, tag: String, status: String, description: String, o
     }
 }
 
+
+
+// Preview for Individual IssueItem
 @Preview(showBackground = true)
 @Composable
-fun IssueListScreenPreview() {
-    IssueListScreen(onIssueClick = {})
+fun IssueItemPreview() {
+    IssueItem(
+        title = "Fix UI Bug",
+        tag = "Bug",
+        status = "Open",
+        description = "App crashes when rotating the screen.",
+        onClick = {}
+    )
 }
