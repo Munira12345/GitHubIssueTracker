@@ -7,6 +7,7 @@ plugins {
 }
 
 
+
 android {
     namespace = "com.munir.githubissuetracker"
     compileSdk = 35
