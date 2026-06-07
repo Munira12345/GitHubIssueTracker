@@ -10,3 +10,4 @@ query GetIssues($owner: String!, $repo: String!) {
         }
     }
 }
+
